@@ -1,0 +1,99 @@
+use hr;
+
+select * from employees;
+
+select employee_id,first_name,salary,department_id from employees;
+
+select department_id,location_id from departments;
+
+select first_name,salary,salary+300 bonus_salary from employees;
+
+select commission_pct  from employees;
+
+select first_name,12*salary*commission_pct from employees;
+
+select concat(first_name," works as ",job_id) as employee_with_id from employees; 
+
+select distinct department_id from employees;
+desc employees;
+
+select employee_id,first_name,department_id from employees where department_id=50;
+
+select * from employees where first_name="james";
+
+select employee_id,first_name,department_id  from employees where hire_date='1999-01-14';
+
+select employee_id,first_name,department_id,hire_date from employees where date_format(hire_date, '%Y')=1996;
+
+select employee_id,first_name,department_id,date_format(hire_date,'%W %D %M %Y') date_hire from employees where date_format(hire_date, '%Y')=1996;
+
+select first_name,salary from employees where salary <=8000;
+select first_name,salary from employees where salary =2600;
+
+select first_name,salary from employees where salary between 2400 and 8000;
+select first_name,salary,manager_id,employee_id from employees;
+select avg(salary) avgsal,max(salary) maxsal,min(salary) minsal,department_id from employees where department_id=50;
+
+select count(*) from employees where department_id=90;
+select count(commission_pct) from employees;
+
+select avg(commission_pct) from employees;
+select (sum(commission_pct)/count(*)) avg from employees;
+ 
+select avg(salary) avgsal,max(salary) maxsal,min(salary) minsal,department_id from employees group by department_id;
+
+select department_id,sum(salary) from employees group by department_id;
+
+select avg(salary) avgsal,max(salary) maxsal,min(salary) minsal,department_id from employees where (department_id>40) group by department_id;
+
+select avg(salary) avgsal,max(salary) maxsal,min(salary) minsal,department_id from employees group by department_id order by department_id desc;
+
+select department_id,count(first_name),manager_id from employees group by manager_id;
+
+select sum(salary),avg(salary),department_id from employees group by department_id having avg(salary)>8000;
+
+select department_id,max(salary) from employees group by department_id having max(salary)>10000;
+
+select  job_id,sum(salary) from employees where job_id not like '%rep%' group by job_id;
+select avg(salary) from employees group by department_id;
+
+select  job_id,sum(salary) from employees where job_id not like '%rep%' group by job_id having sum(salary)>=12000 order by sum(salary) desc;
+
+
+select employee_id,first_name,salary,manager_id from employees where  manager_id in(100,101,101,201);
+
+select first_name from employees where first_name like "_o%n";
+
+select first_name,last_name,manager_id from employees where manager_id is null;
+
+select employee_id,first_name,job_id,salary from employees where ((salary>=5000)and (job_id like'%man%'));
+
+select first_name,job_id,salary from employees where ((job_id = 'ST_MAN') or (job_id like 'a%')) and (salary>5000);
+
+select first_name,salary ,hire_date from employees order by salary;
+
+select mod(11,6);
+select salary,first_name,mod(salary,5000) from employees where job_id='SA_REP';
+select first_name,salary ,hire_date from employees order by salary,first_name desc;
+
+select concat('hello','world');
+
+select substr('helloworld',1,5);
+
+select length('world');
+
+select instr('helloworld','l');
+
+select replace('flue fack','f','bl');
+
+select rpad(last_name,18,'*') from employees;
+
+select employee_id,concat(first_name,last_name) name,job_id,length(last_name),instr(last_name,'a') contains_a from employees where substr(job_id,4)='rep';
+
+select upper(concat(substr(last_name,1,8),'_884')) from employees where department_id=50;
+
+select round(45.947,2) from dual;
+
+select e.employee_id,e.first_name,j.job_title,e.job_id from employees e inner join jobs j where e.job_id=j.job_id;
+select e.employee_id,e.first_name,j.job_title,e.job_id from employees e left join jobs j where e.job_id=j.job_id;
+select e.employee_id,e.first_name,j.job_title,e.job_id from employees e right join jobs j where e.job_id=j.job_id;
