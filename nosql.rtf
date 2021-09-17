@@ -1,0 +1,510 @@
+{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1033{\fonttbl{\f0\fnil\fcharset0 Calibri;}}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sa200\sl276\slmult1\f0\fs22\lang9  show dbs\par
+admin   0.000GB\par
+config  0.000GB\par
+local   0.000GB\par
+test    0.000GB\par
+> db.createCollection("customer");\par
+\{\par
+        "ok" : 0,\par
+        "errmsg" : "Collection already exists. NS: test.customer",\par
+        "code" : 48,\par
+        "codeName" : "NamespaceExists"\par
+\}\par
+> db.customer.insert(\{first_name:"sakthi",last_name:"R"\});\par
+WriteResult(\{ "nInserted" : 1 \})\par
+> db.customer.find();\par
+\{ "_id" : ObjectId("6142e5d558db17872855a774"), "first_name" : "sakthi", "last_name" : "R" \}\par
+\{ "_id" : ObjectId("6142e67258db17872855a775"), "first_name" : "dilip", "last_name" : "Rao", "sex" : "male", "age" : 40 \}\par
+\{ "_id" : ObjectId("614459b5b3dac4e652d5ad0e"), "first_name" : "sakthi", "last_name" : "R" \}\par
+> db.createCollection("customers");\par
+\{ "ok" : 1 \}\par
+> db.customers.insert(\{first_name:"sakthi",last_name:"R"\});\par
+WriteResult(\{ "nInserted" : 1 \})\par
+> db.customer.find();\par
+\{ "_id" : ObjectId("6142e5d558db17872855a774"), "first_name" : "sakthi", "last_name" : "R" \}\par
+\{ "_id" : ObjectId("6142e67258db17872855a775"), "first_name" : "dilip", "last_name" : "Rao", "sex" : "male", "age" : 40 \}\par
+\{ "_id" : ObjectId("614459b5b3dac4e652d5ad0e"), "first_name" : "sakthi", "last_name" : "R" \}\par
+> db.customers.find();\par
+\{ "_id" : ObjectId("614459e6b3dac4e652d5ad0f"), "first_name" : "sakthi", "last_name" : "R" \}\par
+> db.customers.find().pretty();\par
+\{\par
+        "_id" : ObjectId("614459e6b3dac4e652d5ad0f"),\par
+        "first_name" : "sakthi",\par
+        "last_name" : "R"\par
+\}\par
+> show collections\par
+customer\par
+customers\par
+> db.customers.insert([\{first_name:"dilip",last_name:"Rao"\},\{first_name:"Sourav",last_name:"Ganguly"\}]);\par
+BulkWriteResult(\{\par
+        "writeErrors" : [ ],\par
+        "writeConcernErrors" : [ ],\par
+        "nInserted" : 2,\par
+        "nUpserted" : 0,\par
+        "nMatched" : 0,\par
+        "nModified" : 0,\par
+        "nRemoved" : 0,\par
+        "upserted" : [ ]\par
+\})\par
+> db.customers.find().pretty();\par
+\{\par
+        "_id" : ObjectId("614459e6b3dac4e652d5ad0f"),\par
+        "first_name" : "sakthi",\par
+        "last_name" : "R"\par
+\}\par
+\{\par
+        "_id" : ObjectId("61445a29b3dac4e652d5ad10"),\par
+        "first_name" : "dilip",\par
+        "last_name" : "Rao"\par
+\}\par
+\{\par
+        "_id" : ObjectId("61445a29b3dac4e652d5ad11"),\par
+        "first_name" : "Sourav",\par
+        "last_name" : "Ganguly"\par
+\}\par
+> db.customers.insert(\{first_name:"vinay",last_name:"Rs"\});\par
+WriteResult(\{ "nInserted" : 1 \})\par
+> db.customers.find().pretty();\par
+\{\par
+        "_id" : ObjectId("614459e6b3dac4e652d5ad0f"),\par
+        "first_name" : "sakthi",\par
+        "last_name" : "R"\par
+\}\par
+\{\par
+        "_id" : ObjectId("61445a29b3dac4e652d5ad10"),\par
+        "first_name" : "dilip",\par
+        "last_name" : "Rao"\par
+\}\par
+\{\par
+        "_id" : ObjectId("61445a29b3dac4e652d5ad11"),\par
+        "first_name" : "Sourav",\par
+        "last_name" : "Ganguly"\par
+\}\par
+\{\par
+        "_id" : ObjectId("61445a50b3dac4e652d5ad12"),\par
+        "first_name" : "vinay",\par
+        "last_name" : "Rs"\par
+\}\par
+> db.customer.inserts(\{first_name:"vinay",last_name:"Rs",gender:"male"\});\par
+uncaught exception: TypeError: db.customer.inserts is not a function :\par
+@(shell):1:1\par
+> db.customers.insert(\{first_name:"vinay",last_name:"Rs",gender:"male"\});\par
+WriteResult(\{ "nInserted" : 1 \})\par
+> db.customers.find().pretty();\par
+\{\par
+        "_id" : ObjectId("614459e6b3dac4e652d5ad0f"),\par
+        "first_name" : "sakthi",\par
+        "last_name" : "R"\par
+\}\par
+\{\par
+        "_id" : ObjectId("61445a29b3dac4e652d5ad10"),\par
+        "first_name" : "dilip",\par
+        "last_name" : "Rao"\par
+\}\par
+\{\par
+        "_id" : ObjectId("61445a29b3dac4e652d5ad11"),\par
+        "first_name" : "Sourav",\par
+        "last_name" : "Ganguly"\par
+\}\par
+\{\par
+        "_id" : ObjectId("61445a50b3dac4e652d5ad12"),\par
+        "first_name" : "vinay",\par
+        "last_name" : "Rs"\par
+\}\par
+\{\par
+        "_id" : ObjectId("61445a93b3dac4e652d5ad13"),\par
+        "first_name" : "vinay",\par
+        "last_name" : "Rs",\par
+        "gender" : "male"\par
+\}\par
+> db.customers.insert([\{first_name:"dilip",last_name:"Rao"\},\{first_name:"Sourav",last_name:"Ganguly"\}]);\par
+BulkWriteResult(\{\par
+        "writeErrors" : [ ],\par
+        "writeConcernErrors" : [ ],\par
+        "nInserted" : 2,\par
+        "nUpserted" : 0,\par
+        "nMatched" : 0,\par
+        "nModified" : 0,\par
+        "nRemoved" : 0,\par
+        "upserted" : [ ]\par
+\})\par
+> db.customers.find().pretty();\par
+\{\par
+        "_id" : ObjectId("614459e6b3dac4e652d5ad0f"),\par
+        "first_name" : "sakthi",\par
+        "last_name" : "R"\par
+\}\par
+\{\par
+        "_id" : ObjectId("61445a29b3dac4e652d5ad10"),\par
+        "first_name" : "dilip",\par
+        "last_name" : "Rao"\par
+\}\par
+\{\par
+        "_id" : ObjectId("61445a29b3dac4e652d5ad11"),\par
+        "first_name" : "Sourav",\par
+        "last_name" : "Ganguly"\par
+\}\par
+\{\par
+        "_id" : ObjectId("61445a50b3dac4e652d5ad12"),\par
+        "first_name" : "vinay",\par
+        "last_name" : "Rs"\par
+\}\par
+\{\par
+        "_id" : ObjectId("61445a93b3dac4e652d5ad13"),\par
+        "first_name" : "vinay",\par
+        "last_name" : "Rs",\par
+        "gender" : "male"\par
+\}\par
+\{\par
+        "_id" : ObjectId("61445e79b3dac4e652d5ad14"),\par
+        "first_name" : "dilip",\par
+        "last_name" : "Rao"\par
+\}\par
+\{\par
+        "_id" : ObjectId("61445e79b3dac4e652d5ad15"),\par
+        "first_name" : "Sourav",\par
+        "last_name" : "Ganguly"\par
+\}\par
+> db.customers.insert(\{first_name:"vinay",last_name:"Rs"\});\par
+WriteResult(\{ "nInserted" : 1 \})\par
+> db.customers.find().pretty();\par
+\{\par
+        "_id" : ObjectId("614459e6b3dac4e652d5ad0f"),\par
+        "first_name" : "sakthi",\par
+        "last_name" : "R"\par
+\}\par
+\{\par
+        "_id" : ObjectId("61445a29b3dac4e652d5ad10"),\par
+        "first_name" : "dilip",\par
+        "last_name" : "Rao"\par
+\}\par
+\{\par
+        "_id" : ObjectId("61445a29b3dac4e652d5ad11"),\par
+        "first_name" : "Sourav",\par
+        "last_name" : "Ganguly"\par
+\}\par
+\{\par
+        "_id" : ObjectId("61445a50b3dac4e652d5ad12"),\par
+        "first_name" : "vinay",\par
+        "last_name" : "Rs"\par
+\}\par
+\{\par
+        "_id" : ObjectId("61445a93b3dac4e652d5ad13"),\par
+        "first_name" : "vinay",\par
+        "last_name" : "Rs",\par
+        "gender" : "male"\par
+\}\par
+\{\par
+        "_id" : ObjectId("61445e79b3dac4e652d5ad14"),\par
+        "first_name" : "dilip",\par
+        "last_name" : "Rao"\par
+\}\par
+\{\par
+        "_id" : ObjectId("61445e79b3dac4e652d5ad15"),\par
+        "first_name" : "Sourav",\par
+        "last_name" : "Ganguly"\par
+\}\par
+\{\par
+        "_id" : ObjectId("61445ebfb3dac4e652d5ad16"),\par
+        "first_name" : "vinay",\par
+        "last_name" : "Rs"\par
+\}\par
+> db.customers.insert(\{first_name:"vinay",last_name:"Rs",gender:"male"\});\par
+WriteResult(\{ "nInserted" : 1 \})\par
+> db.customers.find().pretty();\par
+\{\par
+        "_id" : ObjectId("614459e6b3dac4e652d5ad0f"),\par
+        "first_name" : "sakthi",\par
+        "last_name" : "R"\par
+\}\par
+\{\par
+        "_id" : ObjectId("61445a29b3dac4e652d5ad10"),\par
+        "first_name" : "dilip",\par
+        "last_name" : "Rao"\par
+\}\par
+\{\par
+        "_id" : ObjectId("61445a29b3dac4e652d5ad11"),\par
+        "first_name" : "Sourav",\par
+        "last_name" : "Ganguly"\par
+\}\par
+\{\par
+        "_id" : ObjectId("61445a50b3dac4e652d5ad12"),\par
+        "first_name" : "vinay",\par
+        "last_name" : "Rs"\par
+\}\par
+\{\par
+        "_id" : ObjectId("61445a93b3dac4e652d5ad13"),\par
+        "first_name" : "vinay",\par
+        "last_name" : "Rs",\par
+        "gender" : "male"\par
+\}\par
+\{\par
+        "_id" : ObjectId("61445e79b3dac4e652d5ad14"),\par
+        "first_name" : "dilip",\par
+        "last_name" : "Rao"\par
+\}\par
+\{\par
+        "_id" : ObjectId("61445e79b3dac4e652d5ad15"),\par
+        "first_name" : "Sourav",\par
+        "last_name" : "Ganguly"\par
+\}\par
+\{\par
+        "_id" : ObjectId("61445ebfb3dac4e652d5ad16"),\par
+        "first_name" : "vinay",\par
+        "last_name" : "Rs"\par
+\}\par
+\{\par
+        "_id" : ObjectId("61445f0eb3dac4e652d5ad17"),\par
+        "first_name" : "vinay",\par
+        "last_name" : "Rs",\par
+        "gender" : "male"\par
+\}\par
+> db.customers.update(\{first_name:"dilip"\},\{$set:\{gender:"male"\}\});\par
+WriteResult(\{ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 \})\par
+> db.customers.find();\par
+\{ "_id" : ObjectId("614459e6b3dac4e652d5ad0f"), "first_name" : "sakthi", "last_name" : "R" \}\par
+\{ "_id" : ObjectId("61445a29b3dac4e652d5ad10"), "first_name" : "dilip", "last_name" : "Rao", "gender" : "male" \}\par
+\{ "_id" : ObjectId("61445a29b3dac4e652d5ad11"), "first_name" : "Sourav", "last_name" : "Ganguly" \}\par
+\{ "_id" : ObjectId("61445a50b3dac4e652d5ad12"), "first_name" : "vinay", "last_name" : "Rs" \}\par
+\{ "_id" : ObjectId("61445a93b3dac4e652d5ad13"), "first_name" : "vinay", "last_name" : "Rs", "gender" : "male" \}\par
+\{ "_id" : ObjectId("61445e79b3dac4e652d5ad14"), "first_name" : "dilip", "last_name" : "Rao" \}\par
+\{ "_id" : ObjectId("61445e79b3dac4e652d5ad15"), "first_name" : "Sourav", "last_name" : "Ganguly" \}\par
+\{ "_id" : ObjectId("61445ebfb3dac4e652d5ad16"), "first_name" : "vinay", "last_name" : "Rs" \}\par
+\{ "_id" : ObjectId("61445f0eb3dac4e652d5ad17"), "first_name" : "vinay", "last_name" : "Rs", "gender" : "male" \}\par
+> db.customers.update(\{first_name:"dilip"\},\{$set:\{age:45\}\});\par
+WriteResult(\{ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 \})\par
+> db.customers.find().pretty();\par
+\{\par
+        "_id" : ObjectId("614459e6b3dac4e652d5ad0f"),\par
+        "first_name" : "sakthi",\par
+        "last_name" : "R"\par
+\}\par
+\{\par
+        "_id" : ObjectId("61445a29b3dac4e652d5ad10"),\par
+        "first_name" : "dilip",\par
+        "last_name" : "Rao",\par
+        "gender" : "male",\par
+        "age" : 45\par
+\}\par
+\{\par
+        "_id" : ObjectId("61445a29b3dac4e652d5ad11"),\par
+        "first_name" : "Sourav",\par
+        "last_name" : "Ganguly"\par
+\}\par
+\{\par
+        "_id" : ObjectId("61445a50b3dac4e652d5ad12"),\par
+        "first_name" : "vinay",\par
+        "last_name" : "Rs"\par
+\}\par
+\{\par
+        "_id" : ObjectId("61445a93b3dac4e652d5ad13"),\par
+        "first_name" : "vinay",\par
+        "last_name" : "Rs",\par
+        "gender" : "male"\par
+\}\par
+\{\par
+        "_id" : ObjectId("61445e79b3dac4e652d5ad14"),\par
+        "first_name" : "dilip",\par
+        "last_name" : "Rao"\par
+\}\par
+\{\par
+        "_id" : ObjectId("61445e79b3dac4e652d5ad15"),\par
+        "first_name" : "Sourav",\par
+        "last_name" : "Ganguly"\par
+\}\par
+\{\par
+        "_id" : ObjectId("61445ebfb3dac4e652d5ad16"),\par
+        "first_name" : "vinay",\par
+        "last_name" : "Rs"\par
+\}\par
+\{\par
+        "_id" : ObjectId("61445f0eb3dac4e652d5ad17"),\par
+        "first_name" : "vinay",\par
+        "last_name" : "Rs",\par
+        "gender" : "male"\par
+\}\par
+> db.customer.update(\{first_namme:"dilip"\},\{$inc:\{age:5\}\});\par
+WriteResult(\{ "nMatched" : 0, "nUpserted" : 0, "nModified" : 0 \})\par
+> db.customer.update(\{first_name:"dilip"\},\{$unset:\{age:1\}\});\par
+WriteResult(\{ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 \})\par
+> db.customers.find().pretty();\par
+\{\par
+        "_id" : ObjectId("614459e6b3dac4e652d5ad0f"),\par
+        "first_name" : "sakthi",\par
+        "last_name" : "R"\par
+\}\par
+\{\par
+        "_id" : ObjectId("61445a29b3dac4e652d5ad10"),\par
+        "first_name" : "dilip",\par
+        "last_name" : "Rao",\par
+        "gender" : "male",\par
+        "age" : 45\par
+\}\par
+\{\par
+        "_id" : ObjectId("61445a29b3dac4e652d5ad11"),\par
+        "first_name" : "Sourav",\par
+        "last_name" : "Ganguly"\par
+\}\par
+\{\par
+        "_id" : ObjectId("61445a50b3dac4e652d5ad12"),\par
+        "first_name" : "vinay",\par
+        "last_name" : "Rs"\par
+\}\par
+\{\par
+        "_id" : ObjectId("61445a93b3dac4e652d5ad13"),\par
+        "first_name" : "vinay",\par
+        "last_name" : "Rs",\par
+        "gender" : "male"\par
+\}\par
+\{\par
+        "_id" : ObjectId("61445e79b3dac4e652d5ad14"),\par
+        "first_name" : "dilip",\par
+        "last_name" : "Rao"\par
+\}\par
+\{\par
+        "_id" : ObjectId("61445e79b3dac4e652d5ad15"),\par
+        "first_name" : "Sourav",\par
+        "last_name" : "Ganguly"\par
+\}\par
+\{\par
+        "_id" : ObjectId("61445ebfb3dac4e652d5ad16"),\par
+        "first_name" : "vinay",\par
+        "last_name" : "Rs"\par
+\}\par
+\{\par
+        "_id" : ObjectId("61445f0eb3dac4e652d5ad17"),\par
+        "first_name" : "vinay",\par
+        "last_name" : "Rs",\par
+        "gender" : "male"\par
+\}\par
+> db.customer.update(\{first_name:"shiva"\},\{first_name:"shiv",gender:"male"\},\{upset:true\});\par
+WriteResult(\{ "nMatched" : 0, "nUpserted" : 0, "nModified" : 0 \})\par
+> db.customers.find().pretty();\par
+\{\par
+        "_id" : ObjectId("614459e6b3dac4e652d5ad0f"),\par
+        "first_name" : "sakthi",\par
+        "last_name" : "R"\par
+\}\par
+\{\par
+        "_id" : ObjectId("61445a29b3dac4e652d5ad10"),\par
+        "first_name" : "dilip",\par
+        "last_name" : "Rao",\par
+        "gender" : "male",\par
+        "age" : 45\par
+\}\par
+\{\par
+        "_id" : ObjectId("61445a29b3dac4e652d5ad11"),\par
+        "first_name" : "Sourav",\par
+        "last_name" : "Ganguly"\par
+\}\par
+\{\par
+        "_id" : ObjectId("61445a50b3dac4e652d5ad12"),\par
+        "first_name" : "vinay",\par
+        "last_name" : "Rs"\par
+\}\par
+\{\par
+        "_id" : ObjectId("61445a93b3dac4e652d5ad13"),\par
+        "first_name" : "vinay",\par
+        "last_name" : "Rs",\par
+        "gender" : "male"\par
+\}\par
+\{\par
+        "_id" : ObjectId("61445e79b3dac4e652d5ad14"),\par
+        "first_name" : "dilip",\par
+        "last_name" : "Rao"\par
+\}\par
+\{\par
+        "_id" : ObjectId("61445e79b3dac4e652d5ad15"),\par
+        "first_name" : "Sourav",\par
+        "last_name" : "Ganguly"\par
+\}\par
+\{\par
+        "_id" : ObjectId("61445ebfb3dac4e652d5ad16"),\par
+        "first_name" : "vinay",\par
+        "last_name" : "Rs"\par
+\}\par
+\{\par
+        "_id" : ObjectId("61445f0eb3dac4e652d5ad17"),\par
+        "first_name" : "vinay",\par
+        "last_name" : "Rs",\par
+        "gender" : "male"\par
+\}\par
+> db.customer.find(\{age:\{$gt:30\}\}).limit(2).skip(2);\par
+> db.customers.find(\{age:\{$gt:30\}\}).limit(2).skip(2);\par
+> db.customers.find().pretty();\par
+\{\par
+        "_id" : ObjectId("614459e6b3dac4e652d5ad0f"),\par
+        "first_name" : "sakthi",\par
+        "last_name" : "R"\par
+\}\par
+\{\par
+        "_id" : ObjectId("61445a29b3dac4e652d5ad10"),\par
+        "first_name" : "dilip",\par
+        "last_name" : "Rao",\par
+        "gender" : "male",\par
+        "age" : 45\par
+\}\par
+\{\par
+        "_id" : ObjectId("61445a29b3dac4e652d5ad11"),\par
+        "first_name" : "Sourav",\par
+        "last_name" : "Ganguly"\par
+\}\par
+\{\par
+        "_id" : ObjectId("61445a50b3dac4e652d5ad12"),\par
+        "first_name" : "vinay",\par
+        "last_name" : "Rs"\par
+\}\par
+\{\par
+        "_id" : ObjectId("61445a93b3dac4e652d5ad13"),\par
+        "first_name" : "vinay",\par
+        "last_name" : "Rs",\par
+        "gender" : "male"\par
+\}\par
+\{\par
+        "_id" : ObjectId("61445e79b3dac4e652d5ad14"),\par
+        "first_name" : "dilip",\par
+        "last_name" : "Rao"\par
+\}\par
+\{\par
+        "_id" : ObjectId("61445e79b3dac4e652d5ad15"),\par
+        "first_name" : "Sourav",\par
+        "last_name" : "Ganguly"\par
+\}\par
+\{\par
+        "_id" : ObjectId("61445ebfb3dac4e652d5ad16"),\par
+        "first_name" : "vinay",\par
+        "last_name" : "Rs"\par
+\}\par
+\{\par
+        "_id" : ObjectId("61445f0eb3dac4e652d5ad17"),\par
+        "first_name" : "vinay",\par
+        "last_name" : "Rs",\par
+        "gender" : "male"\par
+\}\par
+> db.customers.find(\{age:\{$gt:30\}\}).limit(1);\par
+\{ "_id" : ObjectId("61445a29b3dac4e652d5ad10"), "first_name" : "dilip", "last_name" : "Rao", "gender" : "male", "age" : 45 \}\par
+> db.customer.find(\{\},\{\}).sort( 1).pretty()\par
+Error: error: \{\par
+        "ok" : 0,\par
+        "errmsg" : "Expected field sortto be of type object",\par
+        "code" : 14,\par
+        "codeName" : "TypeMismatch"\par
+\}\par
+> db.customers.find(\{\},\{\}).sort(1).pretty();\par
+Error: error: \{\par
+        "ok" : 0,\par
+        "errmsg" : "Expected field sortto be of type object",\par
+        "code" : 14,\par
+        "codeName" : "TypeMismatch"\par
+\}\par
+>\par
+> db.customer.find(\{\},\{_id:0,first_name:1,last_name:1\}).sort(\{"last_name":-1\});\par
+\{ "first_name" : "dilip", "last_name" : "Rao" \}\par
+\{ "first_name" : "sakthi", "last_name" : "R" \}\par
+\{ "first_name" : "sakthi", "last_name" : "R" \}\par
+> db.customers.find().count();\par
+9\par
+}
+ 
